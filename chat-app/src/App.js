@@ -6,7 +6,6 @@ function App() {
   const [inputValue1, setInputValue1] = useState('');
   const [inputValue2, setInputValue2] = useState('');
   const [inputValue3, setInputValue3] = useState('');
-  const [inputValue4, setInputValue4] = useState('');
 
   const handleSubmit = async () => {
     try {
@@ -36,10 +35,13 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <p>Login Attempt number 1</p>
+        <h1>Sign in</h1>
+        <label for='i1'>enter your username:</label>
         <input name='i1' type="text" value={inputValue1} onChange={handleInputChange1} />
+        <label for='i2'>enter your email:</label>
         <input name='i2' type="text" value={inputValue2} onChange={handleInputChange2} />
-        <input name='i3' type="text" value={inputValue3} onChange={handleInputChange3} />
+        <label for='i3'>enter your password:</label>
+        <input name='i3' type="text" value={inputValue3} onChange={handleInputChange3} className='lwmb' />
         <button onClick={handleSubmit}>Submit</button>
       </header>
     </div>
