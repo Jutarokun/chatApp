@@ -4,9 +4,10 @@ const cors = require('cors'); // Import the cors module
 const bodyParser = require('body-parser'); // Import body-parser module
 const sqlite3 = require('sqlite3').verbose();
 const port = 5000;
+let path = './database/database.db'
 
 // open the database connection
-let db = new sqlite3.Database('database.db', (err) => {
+let db = new sqlite3.Database(path, (err) => {
     if (err) {
       console.error(err.message);
     }
@@ -29,17 +30,12 @@ app.get('/', (req, res) => {
 });
 
 app.post('/api/submit', (req, res) => {
-    let fname = req.body.input1;
-    let lname = req.body.input2;
-    let email = req.body.input3;
-    let pwd = req.body.input4;
-    let query = `SELECT fname FROM users WHERE fname = ?`;
+    let username = req.body.username;
+    let email = req.body.email;
+    let pwd = req.body.password;
+    let query = `SELECT username FROM users WHERE username = ?`;
     let query2 = `SELECT email FROM users WHERE email = ?`;
-    console.log(fname);
-    console.log(lname);
-    console.log(email);
-    console.log(pwd);
-    let checkValue = fname;
+    let checkValue = username;
     let checkValue2 = email;
     let username_exists = false;
     let email_exists = false;
@@ -71,7 +67,7 @@ app.post('/api/submit', (req, res) => {
 
                 if (!username_exists && !email_exists) {
                     console.log('creating a user');
-                    db.run(`INSERT INTO users (fname, lname, email, password) VALUES (?, ?, ?, ?)`, [fname, lname, email, pwd]);
+                    db.run(`INSERT INTO users (username, email, password) VALUES (?, ?, ?)`, [username, email, pwd]);
                     res.sendStatus(200);
                 }
             });

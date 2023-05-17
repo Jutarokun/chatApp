@@ -11,10 +11,9 @@ function App() {
   const handleSubmit = async () => {
     try {
       const response = await axios.post('http://localhost:5000/api/submit', {
-        input1: inputValue1,
-        input2: inputValue2,
-        input3: inputValue3,
-        input4: inputValue4
+        username: inputValue1,
+        email: inputValue2,
+        password: inputValue3
       });
       console.log(response.data);
     } catch (error) {
@@ -34,10 +33,6 @@ function App() {
     setInputValue3(event.target.value);
   };
 
-  const handleInputChange4 = (event) => {
-    setInputValue4(event.target.value);
-  };
-
   return (
     <div className="App">
       <header className="App-header">
@@ -45,7 +40,6 @@ function App() {
         <input name='i1' type="text" value={inputValue1} onChange={handleInputChange1} />
         <input name='i2' type="text" value={inputValue2} onChange={handleInputChange2} />
         <input name='i3' type="text" value={inputValue3} onChange={handleInputChange3} />
-        <input name='i4' type="text" value={inputValue4} onChange={handleInputChange4} />
         <button onClick={handleSubmit}>Submit</button>
       </header>
     </div>
